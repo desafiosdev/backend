@@ -17,4 +17,17 @@ describe('CadastrarUsuariosController', () => {
 
     expect(spy).toBeCalledWith('request', 'response');
   })
+  test('should receive params on request', () => {
+    const sut = new CadastrarUsuariosController();
+    const spy = jest.spyOn(sut, 'handle');
+    const cadastrarUsuariosRequest: CadastrarUsuariosRequest = {
+      name: 'any_name',
+      email: 'any_email',
+      password: 'any_password'
+    };
+
+    sut.handle(cadastrarUsuariosRequest, 'response');
+
+    expect(spy).toBeCalledWith(cadastrarUsuariosRequest, 'response');
+  });
 });
