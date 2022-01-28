@@ -4,9 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --passWithNoTests",
-    "test:watch": "npm run test --watch",
-    "test:coverage": "npm run test --coverage"
+    "test": "jest",
+    "test:watch": "npm run test -- --watch",
+    "test:coverage": "npm run test -- --coverage"
   },
   "repository": {
     "type": "git",
