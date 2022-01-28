@@ -1,25 +1,33 @@
 {
-    "name": "backend",
-    "version": "1.0.0",
-    "description": "O sistema poderá ser desenvolvido em qualquer linguagem, desde que a junção dos arquivos de frontend e a utilização do banco de dados não seja difícil de ser unido depois :)",
-    "main": "src/index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/desafiosdev/backend.git"
-    },
-    "keywords": [],
-    "authors": [
-        {
-            "name": "Tadeu",
-            "email": "tadeufbarbosa@gmail.com"
-        }
-    ],
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/desafiosdev/backend/issues"
-    },
-    "homepage": "https://github.com/desafiosdev/backend#readme"
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --passWithNoTests",
+    "test:watch": "npm run test --watch",
+    "test:coverage": "npm run test --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desafiosdev/backend.git"
+  },
+  "keywords": [],
+  "authors": [
+    {
+      "name": "Tadeu",
+      "email": "tadeufbarbosa@gmail.com"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/desafiosdev/backend/issues"
+  },
+  "homepage": "https://github.com/desafiosdev/backend#readme",
+  "dependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "babel-jest": "^27.4.6"
+  }
 }
