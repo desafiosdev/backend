@@ -1,4 +1,5 @@
 import CadastrarUsuariosController from '../../../src/controllers/cadastrar-usuarios-controller';
+import CadastrarUsuariosRequest from '../../../src/request/cadastrar-usuarios-request';
 
 describe('CadastrarUsuariosController', () => {
   test('should exist', () => {
