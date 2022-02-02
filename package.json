@@ -23,7 +23,8 @@
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
-    "bcrypt": "^5.0.1"
+    "bcrypt": "^5.0.1",
+    "crypto": "^1.0.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0"
