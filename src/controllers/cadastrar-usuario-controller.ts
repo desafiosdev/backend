@@ -1,7 +1,7 @@
 import ICadastrarUsuariosRepository from '../contracts/repositories/i-cadastrar-usuarios-repository';
 import * as path from 'path';
 
-export default class CadastrarUsuariosController {
+export default class CadastrarUsuarioController {
   constructor(
     private readonly repository: ICadastrarUsuariosRepository
   ) { }
