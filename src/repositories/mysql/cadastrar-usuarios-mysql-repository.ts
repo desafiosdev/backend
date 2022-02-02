@@ -3,11 +3,15 @@ import ICadastrarUsuariosRepository from '../../contracts/repositories/i-cadastr
 export default class CadastrarUsuariosMysqlRepository implements ICadastrarUsuariosRepository {
   constructor() { }
 
-  async execute({ name, email, password }): Promise<string | Error> {
+  async execute({ name, email, password }): Promise<string> {
     const id = 'any_id';
 
     // conecta ao banco de dados
 
     return new Promise(resolve => resolve(id));
+  }
+
+  async emailExists(email: string): Promise<boolean> {
+    return new Promise(resolve => resolve(false));
   }
 }

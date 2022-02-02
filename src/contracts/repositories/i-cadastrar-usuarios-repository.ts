@@ -1,3 +1,5 @@
 export default interface ICadastrarUsuariosRepository {
-  execute(data): Promise<string | Error>;
+  execute(data): Promise<string>;
+
+  emailExists(email): Promise<boolean>;
 }
