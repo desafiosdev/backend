@@ -21,16 +21,12 @@ export default class CriarNovoItemController implements Controller {
         throw new Error('Você precisa estar logado para criar um novo item!');
       }
 
-      const data = await this.service.execute(usuarioId, content);
-
-      if (data instanceof Error) {
-        throw new Error('Não foi possível criar o item: ' + data.message);
-      }
+      const itemId = await this.service.execute(usuarioId, content);
 
       return ok('dashboard', {
         message: 'Item criado com sucesso!',
         body: {
-          itemId: data,
+          itemId,
           content,
         }
       });
