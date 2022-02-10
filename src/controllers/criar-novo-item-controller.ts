@@ -1,17 +1,20 @@
+import { ok, badRequest } from '../helpers/http-helpers';
+import { IHttpRequest, IHttpResponse } from '../protocols';
+import { Controller } from '../protocols/controller';
 import CriarNovoItemService from '../services/criar-novo-item-service';
 
-export default class CriarNovoItemController {
+export default class CriarNovoItemController implements Controller {
   constructor(
     private readonly service: CriarNovoItemService
   ) { }
 
-  async handle(request, response) {
+  async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
-      if (!request.params.content) {
+      if (!request.body.content) {
         throw new Error('Você precisa passar um conteúdo!');
       }
 
-      const content = request.params.content;
+      const content = request.body.content;
       const usuarioId = localStorage.getItem('user_id');
 
       if (!usuarioId) {
@@ -24,7 +27,7 @@ export default class CriarNovoItemController {
         throw new Error('Não foi possível criar o item: ' + data.message);
       }
 
-      response.json({
+      return ok('dashboard', {
         message: 'Item criado com sucesso!',
         body: {
           itemId: data,
@@ -33,10 +36,7 @@ export default class CriarNovoItemController {
       });
 
     } catch (error) {
-      response.json({
-        message: error.message,
-        body: {}
-      }, 400);
+      return badRequest(error);
     }
   }
 }

@@ -1,26 +1,25 @@
 import ILogoutService from '../contracts/services/i-logout-service';
-import * as path from 'path';
+import { badRequest, ok, redirect } from '../helpers/http-helpers';
+import { Controller } from '../protocols/controller';
+import { IHttpResponse } from '../protocols';
 
-export default class LogoutController {
+export default class LogoutController implements Controller {
   constructor(
     private readonly service: ILogoutService,
   ) { }
 
-  async handle(request, response) {
-    const userId = localStorage.getItem('userId');
-
-    if (!userId) {
-      response.redirect('/login.html');
-      return
-    }
-
+  async handle(): Promise<IHttpResponse> {
     try {
-      await this.service.handle();
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        return redirect('login');
+      }
 
-      response.sendFile(path.join(__dirname + '/views/login.html'));
+      await this.service.handle();
+      return ok('login');
 
     } catch (error) {
-      response.sendFile(path.join(__dirname + `/views/logout.html?message=${error.message}`));
+      return badRequest(error, 'logout');
     }
   }
 }

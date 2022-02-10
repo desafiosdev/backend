@@ -1,13 +1,14 @@
-import ILogarUsuarioRepository from '../contracts/repositories/i-logar-usuario-repository';
-import * as path from 'path';
 import LogarUsuarioService from '../services/logar-usuario-service';
+import { Controller } from '../protocols/controller';
+import { IHttpRequest, IHttpResponse } from '../protocols';
+import { ok, badRequest } from '../helpers/http-helpers';
 
-export default class LogarUsuarioController {
+export default class LogarUsuarioController implements Controller {
   constructor(
     private readonly service: LogarUsuarioService,
   ) { }
 
-  async handle(request, response) {
+  async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
       if (!request.body.email || !request.body.password) {
         throw new Error('Dados inválidos');
@@ -24,12 +25,12 @@ export default class LogarUsuarioController {
       }
 
       const userId = await this.service.getUserPorEmailESenha({ email, password });
-
       localStorage.setItem('userId', userId);
-      response.sendFile(path.join(__dirname + `/views/dashboard.html`));
+
+      return ok('dashboard');
 
     } catch (error) {
-      response.sendFile(path.join(__dirname + `/views/login.html?message=${error.message}`));
+      return badRequest(error, 'login');
     }
   }
 }

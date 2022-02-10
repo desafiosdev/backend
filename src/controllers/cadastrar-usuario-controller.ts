@@ -1,18 +1,20 @@
 import ICadastrarUsuariosRepository from '../contracts/repositories/i-cadastrar-usuarios-repository';
-import * as path from 'path';
+import { Controller } from '../protocols/controller';
+import { IHttpRequest, IHttpResponse } from '../protocols';
+import { ok, badRequest } from '../helpers/http-helpers';
 
-export default class CadastrarUsuarioController {
+export default class CadastrarUsuarioController implements Controller {
   constructor(
     private readonly repository: ICadastrarUsuariosRepository
   ) { }
 
-  async handle(request, response) {
+  async handle(request: IHttpRequest): Promise<IHttpResponse> {
     try {
-      if (!request.params.name || !request.params.email || !request.params.password) {
+      if (!request.body.name || !request.body.email || !request.body.password) {
         throw new Error('Você precisa passar todos os parâmetros!');
       }
 
-      const { name, email, password } = request.params;
+      const { name, email, password } = request.body;
 
       if (email.test(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === false) {
         throw new Error('Email inválido!');
@@ -32,10 +34,17 @@ export default class CadastrarUsuarioController {
 
       const usuarioId = await this.repository.execute({ name, email, password });
       localStorage.setItem('user_id', usuarioId);
-      response.sendFile(path.join(__dirname + '/views/dashboard.html'));
+
+      return ok('dashboard', {
+        user: {
+          id: usuarioId,
+          name,
+          email,
+        },
+      });
 
     } catch (error) {
-      response.sendFile(path.join(__dirname + `/views/cadastro.html?message=${error.message}`));
+      return badRequest(error, 'cadastro');
     }
   }
 }

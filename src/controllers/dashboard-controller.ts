@@ -1,20 +1,21 @@
 import DasboardService from '../services/dashboard-service';
-import * as path from 'path';
+import { Controller } from '../protocols/controller';
+import { IHttpResponse } from '../protocols';
+import { ok, redirect, badRequest } from '../helpers/http-helpers';
 
-export default class DashboardController {
+export default class DashboardController implements Controller {
   constructor(
     private readonly service: DasboardService,
   ) { }
 
-  async handle(request, response) {
+  async handle(): Promise<IHttpResponse> {
     localStorage.setItem('message', null);
     localStorage.setItem('items', JSON.stringify([]));
 
     const userId = localStorage.getItem('userId');
 
     if (!userId) {
-      response.redirect('/login.html');
-      return
+      return redirect('login');
     }
 
     try {
@@ -25,12 +26,10 @@ export default class DashboardController {
       const items = await this.service.getUserItems(userId);
       localStorage.setItem('items', JSON.stringify(items));
 
-      response.sendFile(path.join(__dirname + '/views/dashboard.html'));
+      return ok('dashboard', { items });
 
     } catch (error) {
-      localStorage.setItem('message', error.message);
-
-      response.sendFile(path.join(__dirname + `/views/dashboard.html`));
+      return badRequest(error, 'dashboard');
     }
   }
 
