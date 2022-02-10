@@ -1,4 +1,4 @@
-import { ServerError } from '../errors';
+import { BadRequest, ServerError } from '../errors';
 import { IHttpResponse } from '../protocols'
 
 export const badRequest = (error: Error, file: string = null): IHttpResponse => {
@@ -6,7 +6,7 @@ export const badRequest = (error: Error, file: string = null): IHttpResponse => 
 
   return {
     statusCode: 400,
-    body: error,
+    body: new BadRequest(error.stack),
     file: file,
   }
 }
