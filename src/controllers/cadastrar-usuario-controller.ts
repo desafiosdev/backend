@@ -3,10 +3,12 @@ import { IHttpRequest, IHttpResponse } from '../protocols';
 import { ok, badRequest } from '../helpers/http-helpers';
 import CadastrarUsuariosService from '../services/cadastrar-usuarios-service';
 import CadastrarUsuariosAttrs from '../attrs/cadastrar-usuario-attrs';
+import IPasswordCrypt from '../contracts/services/i-password-crypt';
 
 export default class CadastrarUsuarioController implements Controller {
   constructor(
-    private readonly service: CadastrarUsuariosService
+    private readonly service: CadastrarUsuariosService,
+    private readonly passwordCrypt: IPasswordCrypt,
   ) { }
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
@@ -15,7 +17,7 @@ export default class CadastrarUsuarioController implements Controller {
         throw new Error('Você precisa passar todos os parâmetros!');
       }
 
-      const { name, email, password } = request.body;
+      let { name, email, password } = request.body;
 
       if (email.test(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === false) {
         throw new Error('Email inválido!');
@@ -32,6 +34,8 @@ export default class CadastrarUsuarioController implements Controller {
       if (await this.service.emailExists(email)) {
         throw new Error('Email já cadastrado!');
       }
+
+      password = await this.passwordCrypt.encrypt(password);
 
       const usuario: CadastrarUsuariosAttrs = await this.service.execute({ name, email, password });
       localStorage.setItem('user_id', usuario.id);
