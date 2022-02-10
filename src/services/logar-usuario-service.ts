@@ -7,7 +7,7 @@ export default class LogarUsuarioService {
     private readonly repository: ILogarUsuarioRepository,
   ) { }
 
-  async getUserPorEmailESenha({ email, password }): Promise<string> {
+  async getUserPorEmailESenha({ email, password }: { email: string, password: string }): Promise<string> {
     if (await this.repository.usuarioExists(email) === false) {
       throw new Error('Usuário não encontrado');
     }

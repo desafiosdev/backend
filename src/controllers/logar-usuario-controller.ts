@@ -25,12 +25,16 @@ export default class LogarUsuarioController implements Controller {
       }
 
       const userId = await this.service.getUserPorEmailESenha({ email, password });
-      localStorage.setItem('userId', userId);
+      // localStorage.setItem('userId', userId);
 
-      return ok('dashboard');
+      return ok('dashboard', {
+        user: {
+          id: userId,
+        },
+      });
 
     } catch (error) {
-      return badRequest(error, 'login');
+      return badRequest(error as Error, 'login');
     }
   }
 }

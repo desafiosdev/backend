@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/desafiosdev/backend.git"
   },
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
   "keywords": [],
   "authors": [
     {

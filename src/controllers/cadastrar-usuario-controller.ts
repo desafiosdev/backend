@@ -38,7 +38,7 @@ export default class CadastrarUsuarioController implements Controller {
       password = await this.passwordCrypt.encrypt(password);
 
       const usuario: CadastrarUsuariosAttrs = await this.service.execute({ name, email, password });
-      localStorage.setItem('user_id', usuario.id);
+      // localStorage.setItem('user_id', usuario.id);
 
       return ok('dashboard', {
         user: {
@@ -49,7 +49,7 @@ export default class CadastrarUsuarioController implements Controller {
       });
 
     } catch (error) {
-      return badRequest(error, 'cadastro');
+      return badRequest(error as Error, 'cadastro');
     }
   }
 }

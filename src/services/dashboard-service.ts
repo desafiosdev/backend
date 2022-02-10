@@ -7,7 +7,7 @@ export default class DasboardService {
     private readonly avatarService: IAvatarService,
   ) { }
 
-  async getUserById(userId: string): Promise<{ id, name, avatar }> {
+  async getUserById(userId: string): Promise<{ id: string, name: string, avatar: string }> {
     const { id, name, email } = await this.repository.findUserById(userId);
 
     const avatar = await this.avatarService.generateAvatarBy(email);
@@ -15,7 +15,7 @@ export default class DasboardService {
     return { id, name, avatar };
   }
 
-  async getUserItems(userId: string): Promise<{ id, content }[]> {
+  async getUserItems(userId: string): Promise<{ id: string, content: string }[]> {
     return await this.repository.findUserItems(userId);
   }
 }

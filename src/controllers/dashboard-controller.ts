@@ -9,27 +9,28 @@ export default class DashboardController implements Controller {
   ) { }
 
   async handle(): Promise<IHttpResponse> {
-    localStorage.setItem('message', null);
-    localStorage.setItem('items', JSON.stringify([]));
+    // localStorage.setItem('message', null);
+    // localStorage.setItem('items', JSON.stringify([]));
 
-    const userId = localStorage.getItem('userId');
+    // const userId = localStorage.getItem('userId');
+    const userId = 'any_id';
 
     if (!userId) {
       return redirect('login');
     }
 
     try {
-      const user: { id, name, avatar } = await this.service.getUserById(userId);
-      if (!localStorage.getItem('name')) localStorage.setItem('name', user.name);
-      if (!localStorage.getItem('avatar')) localStorage.setItem('avatar', user.avatar);
+      const user: { id: string, name: string, avatar: string } = await this.service.getUserById(userId);
+      // if (!localStorage.getItem('name')) localStorage.setItem('name', user.name);
+      // if (!localStorage.getItem('avatar')) localStorage.setItem('avatar', user.avatar);
 
       const items = await this.service.getUserItems(userId);
-      localStorage.setItem('items', JSON.stringify(items));
+      // localStorage.setItem('items', JSON.stringify(items));
 
       return ok('dashboard', { items });
 
     } catch (error) {
-      return badRequest(error, 'dashboard');
+      return badRequest(error as Error, 'dashboard');
     }
   }
 

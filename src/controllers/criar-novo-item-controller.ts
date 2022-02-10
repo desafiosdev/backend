@@ -15,7 +15,8 @@ export default class CriarNovoItemController implements Controller {
       }
 
       const content = request.body.content;
-      const usuarioId = localStorage.getItem('user_id');
+      // const usuarioId = localStorage.getItem('user_id');
+      const usuarioId = 'user_id';
 
       if (!usuarioId) {
         throw new Error('Você precisa estar logado para criar um novo item!');
@@ -32,7 +33,7 @@ export default class CriarNovoItemController implements Controller {
       });
 
     } catch (error) {
-      return badRequest(error);
+      return badRequest(error as Error);
     }
   }
 }

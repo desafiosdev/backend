@@ -31,17 +31,17 @@ export default class DashboardMemoryRepository implements IDashboardRepository {
     },
   ];
 
-  async findUserById(userId: string): Promise<{ id, name, email }> {
+  async findUserById(userId: string): Promise<{ id: string, name: string, email: string }> {
     return new Promise((resolve, reject) => {
-      const user = this.users.find(item => item.id === userId);
-      if (!user) {
+      const userIndex = this.users.findIndex(item => item.id === userId);
+      if (userIndex === -1) {
         reject(new Error('User not found'));
       }
-      resolve(user);
+      resolve(this.users[userIndex]);
     });
   }
 
-  async findUserItems(userId: string): Promise<{ id, content }[]> {
+  async findUserItems(userId: string): Promise<{ id: string, content: string }[]> {
     return new Promise((resolve, reject) => {
       const items = this.items.filter(item => item.usuarioId === userId);
       if (!items) {

@@ -1,28 +1,28 @@
 import { BadRequest, ServerError } from '../errors';
 import { IHttpResponse } from '../protocols'
 
-export const badRequest = (error: Error, file: string = null): IHttpResponse => {
-  localStorage.setItem('error', error.message);
+export const badRequest = (error: Error, file: string | null = null): IHttpResponse => {
+  // localStorage.setItem('error', error.message);
 
   return {
     statusCode: 400,
-    body: new BadRequest(error.stack),
-    file: file,
+    body: new BadRequest(error.stack || ''),
+    file: file || ''
   }
 }
 
-export const serverError = (error: Error, file: string = null): IHttpResponse => {
-  localStorage.setItem('error', error.message);
+export const serverError = (error: Error, file: string | null = null): IHttpResponse => {
+  // localStorage.setItem('error', error.message);
 
   return {
     statusCode: 500,
-    body: new ServerError(error.stack),
-    file: file,
+    body: new ServerError(error.stack || ''),
+    file: file || ''
   }
 }
 
 export const ok = (file: string, data: any = null): IHttpResponse => {
-  localStorage.setItem('error', null);
+  // localStorage.setItem('error', null);
 
   return {
     statusCode: 200,
@@ -32,7 +32,7 @@ export const ok = (file: string, data: any = null): IHttpResponse => {
 }
 
 export const redirect = (file: string): IHttpResponse => {
-  localStorage.setItem('error', null);
+  // localStorage.setItem('error', null);
 
   return {
     statusCode: 302,

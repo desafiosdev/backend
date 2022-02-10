@@ -7,11 +7,13 @@ import { makeLogarUsuario } from './factories/logar-usuario';
 import { makeLogout } from './factories/logout';
 import { manipulateController } from './helpers/manipulate-controller';
 
-export default (router: Router): void => {
+export default (router: Router): Router => {
   router.get('/', (req, res) => manipulateController(makeHome, req, res));
   router.get('/dashboard', (req, res) => manipulateController(makeDashboard, req, res));
   router.post('/items', (req, res) => manipulateController(makeCriarNovoItem, req, res));
   router.get('/login', (req, res) => manipulateController(makeLogarUsuario, req, res));
   router.get('/cadastrar', (req, res) => manipulateController(makeCadastrarUsuario, req, res));
   router.get('/logout', (req, res) => manipulateController(makeLogout, req, res));
+
+  return router;
 }
