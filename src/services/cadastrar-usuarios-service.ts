@@ -6,12 +6,13 @@ export default class CadastrarUsuariosService {
     private readonly repository: ICadastrarUsuariosRepository,
   ) { }
 
-  public async execute({ name, email, password }: CadastrarUsuariosAttrs): Promise<CadastrarUsuariosAttrs | Error> {
-    const response: string | Error = await this.repository.execute({ name, email, password });
+  public async emailExists(email: string): Promise<boolean> {
+    const usuario = await this.repository.emailExists(email);
+    return !!usuario;
+  }
 
-    if (response instanceof Error) {
-      return response;
-    }
+  public async execute({ name, email, password }: CadastrarUsuariosAttrs): Promise<CadastrarUsuariosAttrs> {
+    const response: string = await this.repository.execute({ name, email, password });
 
     return { id: response, name, email, password };
   }

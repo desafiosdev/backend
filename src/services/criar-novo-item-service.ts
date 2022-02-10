@@ -5,7 +5,7 @@ export default class CriarNovoItemService {
     private readonly repository: ICriarNovoItemRepository
   ) { }
 
-  async execute(usuarioId: string, content: string): Promise<string | Error> {
+  async execute(usuarioId: string, content: string): Promise<string> {
     return await this.repository.execute(usuarioId, content);
   }
 }

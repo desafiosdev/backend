@@ -4,7 +4,7 @@ export default class CriarNovoItemMysqlRepository implements ICriarNovoItemRepos
   constructor(
   ) { }
 
-  async execute(usuarioId: string, content: string): Promise<string | Error> {
+  async execute(usuarioId: string, content: string): Promise<string> {
     return new Promise((resolve, reject) => {
       // const itemId = this.connection.driver.escape(this.connection.driver.queryBuilder.connection.createQueryBuilder().insert().into('item').values({
       //   usuarioId,

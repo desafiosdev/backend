@@ -3,7 +3,7 @@ import ICriarNovoItemRepository from '../../contracts/repositories/i-criar-novo-
 export default class CriarNovoItemMemoryRepository implements ICriarNovoItemRepository {
   private items = [];
 
-  async execute(usuarioId: string, content: string): Promise<string | Error> {
+  async execute(usuarioId: string, content: string): Promise<string> {
     return new Promise((resolve, reject) => {
       const itemId = this.items.length + 1;
       this.items.push({

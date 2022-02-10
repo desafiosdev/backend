@@ -1,3 +1,3 @@
 export default interface ICriarNovoItemRepository {
-  execute(usuarioId: string, content: string): Promise<string | Error>;
+  execute(usuarioId: string, content: string): Promise<string>;
 }

@@ -1,11 +1,12 @@
-import ICadastrarUsuariosRepository from '../contracts/repositories/i-cadastrar-usuarios-repository';
 import { Controller } from '../protocols/controller';
 import { IHttpRequest, IHttpResponse } from '../protocols';
 import { ok, badRequest } from '../helpers/http-helpers';
+import CadastrarUsuariosService from '../services/cadastrar-usuarios-service';
+import CadastrarUsuariosAttrs from '../attrs/cadastrar-usuario-attrs';
 
 export default class CadastrarUsuarioController implements Controller {
   constructor(
-    private readonly repository: ICadastrarUsuariosRepository
+    private readonly service: CadastrarUsuariosService
   ) { }
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {
@@ -28,16 +29,16 @@ export default class CadastrarUsuarioController implements Controller {
         throw new Error('O nome deve ter no mínimo 3 caracteres!');
       }
 
-      if (await this.repository.emailExists(email)) {
+      if (await this.service.emailExists(email)) {
         throw new Error('Email já cadastrado!');
       }
 
-      const usuarioId = await this.repository.execute({ name, email, password });
-      localStorage.setItem('user_id', usuarioId);
+      const usuario: CadastrarUsuariosAttrs = await this.service.execute({ name, email, password });
+      localStorage.setItem('user_id', usuario.id);
 
       return ok('dashboard', {
         user: {
-          id: usuarioId,
+          id: usuario.id,
           name,
           email,
         },
