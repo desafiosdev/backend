@@ -1,4 +1,5 @@
 import express from 'express';
+import * as path from 'path';
 import { Router } from 'express'
 import addRoutes from './routes';
 
@@ -8,6 +9,7 @@ let router = Router();
 router = addRoutes(router);
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 app.use(router);
 
 app.listen(port, () => {
