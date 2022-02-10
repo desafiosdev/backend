@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc --outDir dist --module commonjs --target es5 --sourceMap"
   },
   "keywords": [],
   "authors": [
