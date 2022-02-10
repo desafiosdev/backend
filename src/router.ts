@@ -5,7 +5,7 @@ import { makeDashboard } from './factories/dashboard';
 import { makeHome } from './factories/home';
 import { makeLogarUsuario } from './factories/logar-usuario';
 import { makeLogout } from './factories/logout';
-import { manipulateController } from './helpers/router';
+import { manipulateController } from './helpers/manipulate-controller';
 
 export default (router: Router): void => {
   router.get('/', (req, res) => manipulateController(makeHome, req, res));
