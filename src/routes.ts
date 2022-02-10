@@ -12,7 +12,7 @@ export default (router: Router): Router => {
   router.get('/dashboard', (req, res) => manipulateController(makeDashboard, req, res));
   router.post('/items', (req, res) => manipulateController(makeCriarNovoItem, req, res));
   router.get('/login', (req, res) => manipulateController(makeLogarUsuario, req, res));
-  router.get('/cadastrar', (req, res) => manipulateController(makeCadastrarUsuario, req, res));
+  router.get('/cadastro', (req, res) => manipulateController(makeCadastrarUsuario, req, res));
   router.get('/logout', (req, res) => manipulateController(makeLogout, req, res));
 
   return router;
