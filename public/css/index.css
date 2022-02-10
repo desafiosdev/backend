@@ -189,21 +189,18 @@ body {
   align-items: center;
   text-align: center;
   justify-content: center;
-  position: absolute;
   width: 100%;
   height: 56.08px;
-  left: 0px;
-  bottom: 0;
-  margin: 0 auto 0 auto;
+  margin: 100px auto 0 auto;
 }
 
-footer ul {
+#rodape ul {
   float: right;
   display: table;
   margin: 0 0 0 10px;
 }
 
-footer ul li {
+#rodape ul li {
   display: table-cell;
   position: flex;
   margin: 0 0 0 10px;
