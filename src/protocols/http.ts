@@ -3,6 +3,7 @@ export interface IHttpRequest {
 }
 
 export interface IHttpResponse {
-  body: any;
+  body?: any;
+  file?: string;
   statusCode: number;
 }
