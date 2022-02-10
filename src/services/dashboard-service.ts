@@ -14,4 +14,8 @@ export default class DasboardService {
 
     return { id, name, avatar };
   }
+
+  async getUserItems(userId: string): Promise<{ id, content }[]> {
+    return await this.repository.findUserItems(userId);
+  }
 }
