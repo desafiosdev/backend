@@ -8,7 +8,8 @@
     "url": "git+https://github.com/desafiosdev/backend.git"
   },
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "build": "rm -rf dist && tsc"
   },
   "keywords": [],
   "authors": [

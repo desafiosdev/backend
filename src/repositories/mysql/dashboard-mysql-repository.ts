@@ -5,7 +5,7 @@ export default class DashboardMysqlRepository implements IDashboardRepository {
     // private readonly connection: Connection,
   ) { }
 
-  async findUserById(userId: string): Promise<{ id, name, email }> {
+  async findUserById(userId: string): Promise<{ id: string, name: string, email: string }> {
     // const [user] = await this.connection.query(`
     //   SELECT
     //     id,
@@ -32,7 +32,7 @@ export default class DashboardMysqlRepository implements IDashboardRepository {
     });
   }
 
-  async findUserItems(userId: string): Promise<{ id, content }[]> {
+  async findUserItems(userId: string): Promise<{ id: string, content: string }[]> {
     // const [items] = await this.connection.query(`
     //   SELECT
     //     id,

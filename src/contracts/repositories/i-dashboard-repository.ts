@@ -1,5 +1,5 @@
 export default interface IDashboardRepository {
-  findUserById(userId: string): Promise<{ id, name, email }>;
+  findUserById(userId: string): Promise<{ id: string, name: string, email: string }>;
 
-  findUserItems(userId: string): Promise<{ id, content }[]>;
+  findUserItems(userId: string): Promise<{ id: string, content: string }[]>;
 }
