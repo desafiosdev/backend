@@ -18,7 +18,7 @@ export default class DashboardController {
       const user: { id, name, avatar } = await this.service.getUserById(userId);
 
       if (!localStorage.getItem('name')) localStorage.setItem('name', user.name);
-      if (!localStorage.getItem('avatar')) localStorage.setItem('name', user.avatar);
+      if (!localStorage.getItem('avatar')) localStorage.setItem('avatar', user.avatar);
 
       response.sendFile(path.join(__dirname + '/views/dashboard.html'));
 
