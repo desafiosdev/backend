@@ -1,4 +1,4 @@
-import IPasswordCrypt from '../contracts/services/i-password-crypt';
+import IPasswordCrypt from '../../contracts/services/i-password-crypt';
 import * as bcrypt from 'bcrypt';
 
 export default class PasswordBcryptAdapter implements IPasswordCrypt {

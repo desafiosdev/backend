@@ -1,4 +1,4 @@
-import IPasswordCrypt from '../contracts/services/i-password-crypt';
+import IPasswordCrypt from '../../contracts/services/i-password-crypt';
 
 export default class PasswordCryptMemory implements IPasswordCrypt {
   async encrypt(password: string): Promise<string> {
